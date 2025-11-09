@@ -1,20 +1,3 @@
-/*
- *  Brick Destroy - A simple Arcade video game
- *   Copyright (C) 2017  Filippo Ranza
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package main.java.gameObjects.model.ball;
 
 import java.awt.*;
@@ -24,9 +7,10 @@ import java.awt.geom.Point2D;
 import main.java.gameObjects.controller.BallController;
 
 /**
- * The objects of this class inherits from the Ball class
- * @author Emily
- *
+ * RubberBall is a specific type of BallController representing a rubber ball.
+ * It provides default color, size, and drawing shape specific to a rubber ball.
+ * 
+ * Author: Emily
  */
 
 public class RubberBall extends BallController {
@@ -36,20 +20,29 @@ public class RubberBall extends BallController {
     private static final Color DEF_BORDER_COLOR = DEF_INNER_COLOR.darker().darker();
 
     /**
-     * Constructor to create a ball object of the type rubber
-     * @param center The coordinates of the center point of the ball
+     * Constructor to create a rubber ball centered at the specified point,
+     * applying default radius and colors.
+     *
+     * @param center The coordinates for the center point of the ball
      */
-
-    public RubberBall(Point2D center){
-        super(center,DEF_RADIUS,DEF_INNER_COLOR,DEF_BORDER_COLOR);
+    public RubberBall(Point2D center) {
+        super(center, DEF_RADIUS, DEF_INNER_COLOR, DEF_BORDER_COLOR);
     }
 
+    /**
+     * Creates the visual shape of the rubber ball as a circle.
+     *
+     * @param center The center point of the ball
+     * @param radius The radius of the ball
+     * @return A Shape representing the ball (an Ellipse2D circle)
+     */
     @Override
-	public Shape makeBall(Point2D center, int radius) {
+    public Shape makeBall(Point2D center, int radius) {
+        // Adjust x, y so that the circle is centered correctly
+        double x = center.getX() - radius;
+        double y = center.getY() - radius;
+        double diameter = 2 * radius;
 
-        double x = center.getX() - (radius / 2);
-        double y = center.getY() - (radius / 2);
-
-        return new Ellipse2D.Double(x,y,radius,radius);
+        return new Ellipse2D.Double(x, y, diameter, diameter);
     }
 }
