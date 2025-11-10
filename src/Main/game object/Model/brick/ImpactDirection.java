@@ -34,3 +34,4 @@ public enum ImpactDirection {
 
     // Optional: You can add methods here if needed, such as for reverse direction or utility
 }
+
