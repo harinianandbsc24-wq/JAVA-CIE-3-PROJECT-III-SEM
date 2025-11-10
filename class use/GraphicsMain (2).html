@@ -20,13 +20,15 @@
   <script src="../../script-dir/jquery-ui.js" defer></script>
 
   <!--[if IE]>
-  <script src="../../script-dir/jszip-utils/dist/jszip-utils-ie.min.js"></script>
+    <script src="../../script-dir/jszip-utils/dist/jszip-utils-ie.min.js"></script>
   <![endif]-->
 </head>
 
 <body class="class-use">
   <noscript>
-    <div>JavaScript is disabled in your browser. Please enable it for the full experience.</div>
+    <div class="no-script-warning">
+      JavaScript is disabled in your browser. Please enable it for the full experience.
+    </div>
   </noscript>
 
   <div class="flexBox">
@@ -47,16 +49,16 @@
         <div class="navListSearch">
           <label for="search">Search:</label>
           <input type="text" id="search" placeholder="Search disabled" disabled>
-          <input type="reset" id="reset" value="Reset" disabled>
+          <button type="reset" id="reset" disabled>Reset</button>
         </div>
       </nav>
     </header>
 
     <!-- Main Content -->
     <main role="main" class="flexContent">
-      <div class="header">
+      <header class="header">
         <h1 class="title">Uses of Class<br><span>main.GraphicsMain</span></h1>
-      </div>
+      </header>
 
       <section class="classUseContainer">
         <p>No usage of <strong>main.GraphicsMain</strong> found.</p>
