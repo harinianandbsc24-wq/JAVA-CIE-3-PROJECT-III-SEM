@@ -1,37 +1,39 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<title>VibraniumBrick</title>
-<meta charset="utf-8">
-<meta name="description" content="declaration: package: main.java.model.brick, class: VibraniumBrick">
-<link rel="stylesheet" type="text/css" href="../../../../stylesheet.css">
-<link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.css">
-<script src="../../../../script.js"></script>
-<script src="../../../../script-dir/jquery-3.4.1.js"></script>
-<script src="../../../../script-dir/jquery-ui.js"></script>
+    <title>VibraniumBrick</title>
+    <meta charset="utf-8">
+    <meta name="description" content="declaration: package: main.java.model.brick, class: VibraniumBrick">
+    <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.css">
+    <script src="../../../../script-dir/jquery-3.4.1.js"></script>
+    <script src="../../../../script-dir/jquery-ui.js"></script>
+    <script src="../../../../script.js"></script>
 </head>
+
 <body class="class-declaration">
 
 <div class="flexBox">
+
 <header role="banner" class="flexHeader">
-<nav role="navigation">
-<!-- ===== Updated Top Navbar ===== -->
-<div class="topNav">
-<a id="navbar.top"></a>
-<div class="skipNav"><a href="#skip.navbar.top" title="Skip navigation links">Skip navigation links</a></div>
-<a id="navbar.top.firstrow"></a>
-<ul class="navList">
-    <li><a href="../../../../index.html">Home</a></li>
-    <li><a href="package-summary.html">Package Overview</a></li>
-    <li class="navBarCell1Rev">Current Class</li>
-    <li><a href="class-use/VibraniumBrick.html">Class Usage</a></li>
-    <li><a href="package-tree.html">Package Tree</a></li>
-    <li><a href="../../../../deprecated-list.html">Deprecated Items</a></li>
-    <li><a href="../../../../index-files/index-1.html">All Classes Index</a></li>
-    <li><a href="../../../../help-doc.html">Help & Docs</a></li>
-</ul>
-</div>
-</nav>
+    <nav role="navigation">
+        <!-- ===== Updated Top Navbar ===== -->
+        <div class="topNav">
+            <a id="navbar.top"></a>
+            <div class="skipNav"><a href="#skip.navbar.top" title="Skip navigation links">Skip navigation links</a></div>
+            <a id="navbar.top.firstrow"></a>
+            <ul class="navList">
+                <li><a href="../../../../index.html">Home</a></li>
+                <li><a href="package-summary.html">Package Overview</a></li>
+                <li class="navBarCell1Rev">Current Class</li>
+                <li><a href="class-use/VibraniumBrick.html">Class Usage</a></li>
+                <li><a href="package-tree.html">Package Tree</a></li>
+                <li><a href="../../../../deprecated-list.html">Deprecated Items</a></li>
+                <li><a href="../../../../index-files/index-1.html">All Classes Index</a></li>
+                <li><a href="../../../../help-doc.html">Help & Docs</a></li>
+            </ul>
+        </div>
+    </nav>
 </header>
 
 <div class="flexContent">
@@ -39,50 +41,146 @@
 
 <!-- ======= START OF CLASS DATA ======= -->
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">main.java.model.brick</a></div>
-<h1 title="Class VibraniumBrick" class="title">Class VibraniumBrick</h1>
+    <div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">main.java.model.brick</a></div>
+    <h1 title="Class VibraniumBrick" class="title">Class VibraniumBrick</h1>
 </div>
+
 <div class="contentContainer">
-<div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance"><a href="../../controller/BrickController.html">main.java.controller.BrickController</a>
-<div class="inheritance">main.java.model.brick.VibraniumBrick</div>
-</div>
-</div>
 
-<section class="description">
-<hr>
-<pre>public class <span class="typeNameLabel">VibraniumBrick</span>
+    <!-- Inheritance Tree -->
+    <div class="inheritance" title="Inheritance Tree">java.lang.Object
+        <div class="inheritance"><a href="../../controller/BrickController.html">main.java.controller.BrickController</a>
+            <div class="inheritance">main.java.model.brick.VibraniumBrick</div>
+        </div>
+    </div>
+
+    <!-- ======= Description ======= -->
+    <section class="description">
+        <hr>
+        <pre>public class <span class="typeNameLabel">VibraniumBrick</span>
 extends <a href="../../controller/BrickController.html">BrickController</a></pre>
-<div class="block">The objects of this class inherits from the BrickController class, creating vibranium brick object</div>
-<dl>
-<dt>Author:</dt>
-<dd>Emily</dd>
-</dl>
-</section>
+        <div class="block">
+            The <code>VibraniumBrick</code> class extends <code>BrickController</code>, representing a special type of brick with enhanced durability and strength. 
+            This brick may require multiple hits to break and can trigger special effects.
+        </div>
+        <dl>
+            <dt>Author:</dt>
+            <dd>Emily</dd>
+        </dl>
+    </section>
 
-<!-- Field, Constructor, Method Summary & Details remain unchanged -->
+    <!-- ======= Field Summary ======= -->
+    <section class="summary">
+        <h2>Field Summary</h2>
+        <table class="memberSummary">
+            <tr><th>Modifier and Type</th><th>Field</th><th>Description</th></tr>
+            <tr>
+                <td>private int</td>
+                <td><a href="#strength">strength</a></td>
+                <td>Represents the number of hits the brick can take before breaking.</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- ======= Constructor Summary ======= -->
+    <section class="summary">
+        <h2>Constructor Summary</h2>
+        <table class="memberSummary">
+            <tr><th>Constructor</th><th>Description</th></tr>
+            <tr>
+                <td><a href="#VibraniumBrick()">VibraniumBrick()</a></td>
+                <td>Creates a new VibraniumBrick instance with default properties.</td>
+            </tr>
+            <tr>
+                <td><a href="#VibraniumBrick-int-int-">VibraniumBrick(int x, int y)</a></td>
+                <td>Creates a VibraniumBrick at the specified coordinates.</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- ======= Method Summary ======= -->
+    <section class="summary">
+        <h2>Method Summary</h2>
+        <table class="memberSummary">
+            <tr><th>Modifier and Type</th><th>Method</th><th>Description</th></tr>
+            <tr>
+                <td>public void</td>
+                <td><a href="#hit()">hit</a>()</td>
+                <td>Reduces the brick's strength when hit by the ball.</td>
+            </tr>
+            <tr>
+                <td>public boolean</td>
+                <td><a href="#isBroken()">isBroken</a>()</td>
+                <td>Checks whether the brick has been completely broken.</td>
+            </tr>
+            <tr>
+                <td>public void</td>
+                <td><a href="#draw(Graphics2D)">draw</a>(Graphics2D g)</td>
+                <td>Renders the Vibranium brick on the screen.</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- ======= Field Detail ======= -->
+    <section class="details">
+        <h2>Field Detail</h2>
+        <h3><a id="strength">strength</a></h3>
+        <pre>private int strength</pre>
+        <div class="block">The durability level of the brick. When it reaches zero, the brick breaks.</div>
+    </section>
+
+    <!-- ======= Constructor Detail ======= -->
+    <section class="details">
+        <h2>Constructor Detail</h2>
+        <h3><a id="VibraniumBrick()">VibraniumBrick</a></h3>
+        <pre>public VibraniumBrick()</pre>
+        <div class="block">Initializes a VibraniumBrick with default position and strength.</div>
+
+        <h3><a id="VibraniumBrick-int-int-">VibraniumBrick</a></h3>
+        <pre>public VibraniumBrick(int x, int y)</pre>
+        <div class="block">Initializes a VibraniumBrick at the given coordinates with predefined strength.</div>
+    </section>
+
+    <!-- ======= Method Detail ======= -->
+    <section class="details">
+        <h2>Method Detail</h2>
+
+        <h3><a id="hit()">hit</a></h3>
+        <pre>public void hit()</pre>
+        <div class="block">Decreases the brick’s strength by one. If the strength reaches zero, the brick breaks.</div>
+
+        <h3><a id="isBroken()">isBroken</a></h3>
+        <pre>public boolean isBroken()</pre>
+        <div class="block">Returns <code>true</code> if the brick’s strength is zero.</div>
+
+        <h3><a id="draw(Graphics2D)">draw</a></h3>
+        <pre>public void draw(Graphics2D g)</pre>
+        <div class="block">Draws the brick using the provided graphics context, displaying special effects for Vibranium material.</div>
+    </section>
+
+</div>
 
 </main>
 
 <footer role="contentinfo">
-<nav role="navigation">
-<!-- ===== Updated Bottom Navbar ===== -->
-<div class="bottomNav">
-<ul class="navList">
-    <li><a href="../../../../index.html">Home</a></li>
-    <li><a href="package-summary.html">Package Overview</a></li>
-    <li class="navBarCell1Rev">Current Class</li>
-    <li><a href="class-use/VibraniumBrick.html">Class Usage</a></li>
-    <li><a href="package-tree.html">Package Tree</a></li>
-    <li><a href="../../../../deprecated-list.html">Deprecated Items</a></li>
-    <li><a href="../../../../index-files/index-1.html">All Classes Index</a></li>
-    <li><a href="../../../../help-doc.html">Help & Docs</a></li>
-</ul>
-</div>
-</nav>
+    <nav role="navigation">
+        <div class="bottomNav">
+            <ul class="navList">
+                <li><a href="../../../../index.html">Home</a></li>
+                <li><a href="package-summary.html">Package Overview</a></li>
+                <li class="navBarCell1Rev">Current Class</li>
+                <li><a href="class-use/VibraniumBrick.html">Class Usage</a></li>
+                <li><a href="package-tree.html">Package Tree</a></li>
+                <li><a href="../../../../deprecated-list.html">Deprecated Items</a></li>
+                <li><a href="../../../../index-files/index-1.html">All Classes Index</a></li>
+                <li><a href="../../../../help-doc.html">Help & Docs</a></li>
+            </ul>
+        </div>
+    </nav>
 </footer>
 
 </div>
 </div>
 </body>
 </html>
+
