@@ -27,7 +27,7 @@
 
   <div class="flexBox">
     <header role="banner" class="flexHeader">
-      <nav role="navigation">
+      <nav role="navigation" aria-label="Top Navigation">
         <!-- ======= TOP NAVBAR ======= -->
         <div class="topNav">
           <ul class="navList" title="Navigation">
@@ -45,16 +45,16 @@
         <div class="subNav">
           <div>
             <ul class="subNavList">
-              <li>Summary:&nbsp;</li>
-              <li>Nested&nbsp;|&nbsp;</li>
-              <li>Field&nbsp;|&nbsp;</li>
-              <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+              <li><strong>Summary:</strong></li>
+              <li>Nested |</li>
+              <li>Field |</li>
+              <li><a href="#constructor.summary">Constructor</a> |</li>
               <li><a href="#method.summary">Method</a></li>
             </ul>
             <ul class="subNavList">
-              <li>Detail:&nbsp;</li>
-              <li>Field&nbsp;|&nbsp;</li>
-              <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+              <li><strong>Detail:</strong></li>
+              <li>Field |</li>
+              <li><a href="#constructor.detail">Constructor</a> |</li>
               <li><a href="#method.detail">Method</a></li>
             </ul>
           </div>
@@ -68,82 +68,82 @@
       </nav>
     </header>
 
-    <div class="flexContent">
-      <main role="main">
-        <!-- ======= CLASS HEADER ======= -->
-        <div class="header">
-          <div class="subTitle">
-            <span class="packageLabelInType">Package</span>
-            &nbsp;<a href="package-summary.html">main.java.model.ball</a>
-          </div>
-          <h1 class="title">Class <span>BallFactory</span></h1>
+    <main role="main" class="flexContent">
+      <!-- ======= CLASS HEADER ======= -->
+      <header class="header">
+        <div class="subTitle">
+          <span class="packageLabelInType">Package:</span>
+          <a href="package-summary.html">main.java.model.ball</a>
         </div>
+        <h1 class="title">Class <span>BallFactory</span></h1>
+      </header>
 
-        <div class="contentContainer">
-          <!-- ======= CLASS DESCRIPTION ======= -->
-          <section class="description">
-            <hr>
-            <pre>public class <span class="typeNameLabel">BallFactory</span>
+      <div class="contentContainer">
+        <!-- ======= CLASS DESCRIPTION ======= -->
+        <section class="description">
+          <hr>
+          <pre>public class <span class="typeNameLabel">BallFactory</span>
 extends java.lang.Object</pre>
-            <p>Factory class responsible for creating different types of ball objects.</p>
-          </section>
+          <p>Factory class responsible for creating different types of ball objects.</p>
+        </section>
 
-          <!-- ======= CONSTRUCTOR SUMMARY ======= -->
-          <section id="constructor.summary">
-            <h2>Constructor Summary</h2>
-            <table class="memberSummary">
-              <caption><span>Constructors</span></caption>
-              <thead>
-                <tr>
-                  <th scope="col">Constructor</th>
-                  <th scope="col">Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="altColor">
-                  <td><code><a href="#BallFactory()">BallFactory</a>()</code></td>
-                  <td>Default constructor.</td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
+        <!-- ======= CONSTRUCTOR SUMMARY ======= -->
+        <section id="constructor.summary">
+          <h2>Constructor Summary</h2>
+          <table class="memberSummary" aria-label="Constructor Summary">
+            <thead>
+              <tr>
+                <th scope="col">Constructor</th>
+                <th scope="col">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code><a href="#BallFactory()">BallFactory</a>()</code></td>
+                <td>Default constructor.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
-          <!-- ======= METHOD SUMMARY ======= -->
-          <section id="method.summary">
-            <h2>Method Summary</h2>
-            <table class="memberSummary">
-              <caption><span>Methods</span></caption>
-              <thead>
-                <tr>
-                  <th scope="col">Modifier and Type</th>
-                  <th scope="col">Method</th>
-                  <th scope="col">Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="altColor">
-                  <td><code><a href="../../controller/BallController.html" title="class in main.java.controller">BallController</a></code></td>
-                  <td><code><a href="#makeBallType(java.lang.String,java.awt.geom.Point2D)">makeBallType</a>(String ballType, Point2D center)</code></td>
-                  <td>Factory method that creates and returns a specific ball instance based on the provided type.</td>
-                </tr>
-              </tbody>
-            </table>
+        <!-- ======= METHOD SUMMARY ======= -->
+        <section id="method.summary">
+          <h2>Method Summary</h2>
+          <table class="memberSummary" aria-label="Method Summary">
+            <thead>
+              <tr>
+                <th scope="col">Modifier and Type</th>
+                <th scope="col">Method</th>
+                <th scope="col">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code><a href="../../controller/BallController.html" title="class in main.java.controller">BallController</a></code></td>
+                <td><code><a href="#makeBallType(java.lang.String,java.awt.geom.Point2D)">makeBallType</a>(String ballType, Point2D center)</code></td>
+                <td>Factory method that creates and returns a specific ball instance based on the provided type.</td>
+              </tr>
+            </tbody>
+          </table>
 
-            <h3>Methods inherited from class <code>java.lang.Object</code></h3>
-            <p><code>equals, getClass, hashCode, notify, notifyAll, toString, wait</code></p>
-          </section>
+          <h3>Methods inherited from class <code>java.lang.Object</code></h3>
+          <p><code>equals, getClass, hashCode, notify, notifyAll, toString, wait</code></p>
+        </section>
 
-          <!-- ======= CONSTRUCTOR DETAILS ======= -->
-          <section id="constructor.detail">
-            <h2>Constructor Details</h2>
+        <!-- ======= CONSTRUCTOR DETAILS ======= -->
+        <section id="constructor.detail">
+          <h2>Constructor Details</h2>
+          <article>
             <h3 id="BallFactory()">BallFactory</h3>
             <pre>public BallFactory()</pre>
             <p>Default constructor. Initializes the BallFactory instance.</p>
-          </section>
+          </article>
+        </section>
 
-          <!-- ======= METHOD DETAILS ======= -->
-          <section id="method.detail">
-            <h2>Method Details</h2>
+        <!-- ======= METHOD DETAILS ======= -->
+        <section id="method.detail">
+          <h2>Method Details</h2>
+          <article>
             <h3 id="makeBallType(java.lang.String,java.awt.geom.Point2D)">makeBallType</h3>
             <pre>public BallController makeBallType(String ballType, Point2D center)</pre>
             <p>Factory method that creates different types of balls based on the provided <code>ballType</code> string.</p>
@@ -154,26 +154,26 @@ extends java.lang.Object</pre>
               <dt><strong>Returns:</strong></dt>
               <dd>A <code>BallController</code> instance representing the created ball.</dd>
             </dl>
-          </section>
-        </div>
-      </main>
+          </article>
+        </section>
+      </div>
+    </main>
 
-      <footer role="contentinfo">
-        <nav role="navigation" class="bottomNav">
-          <!-- ======= BOTTOM NAVBAR ======= -->
-          <ul class="navList" title="Navigation">
-            <li><a href="../../../../index.html">Overview</a></li>
-            <li><a href="package-summary.html">Package</a></li>
-            <li class="navBarCell1Rev">Class</li>
-            <li><a href="class-use/BallFactory.html">Use</a></li>
-            <li><a href="package-tree.html">Tree</a></li>
-            <li><a href="../../../../deprecated-list.html">Deprecated</a></li>
-            <li><a href="../../../../index-files/index-1.html">Index</a></li>
-            <li><a href="../../../../help-doc.html">Help</a></li>
-          </ul>
-        </nav>
-      </footer>
-    </div>
+    <footer role="contentinfo">
+      <nav role="navigation" aria-label="Bottom Navigation" class="bottomNav">
+        <!-- ======= BOTTOM NAVBAR ======= -->
+        <ul class="navList" title="Navigation">
+          <li><a href="../../../../index.html">Overview</a></li>
+          <li><a href="package-summary.html">Package</a></li>
+          <li class="navBarCell1Rev">Class</li>
+          <li><a href="class-use/BallFactory.html">Use</a></li>
+          <li><a href="package-tree.html">Tree</a></li>
+          <li><a href="../../../../deprecated-list.html">Deprecated</a></li>
+          <li><a href="../../../../index-files/index-1.html">Index</a></li>
+          <li><a href="../../../../help-doc.html">Help</a></li>
+        </ul>
+      </nav>
+    </footer>
   </div>
 </body>
 </html>
