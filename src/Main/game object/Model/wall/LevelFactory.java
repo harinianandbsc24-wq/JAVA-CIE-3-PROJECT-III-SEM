@@ -6,46 +6,46 @@ import main.java.gameObjects.controller.BrickController;
 import main.java.gameObjects.model.brick.BrickType;
 
 /**
- * This class implements the Factory design pattern to create multiple levels
+ * Factory class to create multiple game levels consisting of bricks.
+ * Uses Level class to produce various level layouts.
  * 
  * @author Emily
- *
  */
 public class LevelFactory {
 
-	private static final int LEVELS_COUNT = 8;
+    private static final int LEVELS_COUNT = 8;
+    private final Level level;
 
-	private Level level;
+    /**
+     * Default constructor initializing internal Level instance.
+     */
+    public LevelFactory() {
+        level = new Level();
+    }
 
-	public LevelFactory() {
-		level = new Level();
-	}
+    /**
+     * Creates a 2D array of BrickController arrays representing multiple levels.
+     * Each level has distinct brick types and patterns.
+     * 
+     * @param drawArea            The bounding area for the brick wall
+     * @param brickCount          The total number of bricks per level
+     * @param lineCount           The number of lines of bricks
+     * @param brickDimensionRatio The width-to-height ratio of bricks
+     * @return 2D BrickController arrays with levels
+     */
+    public BrickController[][] makeLevels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio) {
+        BrickController[][] levels = new BrickController[LEVELS_COUNT][];
 
-	/**
-	 * Method to create multiple game levels
-	 * 
-	 * @param drawArea            The area of the wall
-	 * @param brickCount          The number of bricks
-	 * @param lineCount           The number of lines
-	 * @param brickDimensionRatio The ratio of the brick shape
-	 * @return An array of brick objects
-	 */
+        levels[0] = level.makeSingleTypeLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.CLAY);
+        levels[1] = level.makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.CLAY, BrickType.CEMENT);
+        levels[2] = level.makeSingleTypeLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.CEMENT);
+        levels[3] = level.makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.CLAY, BrickType.STEEL);
+        levels[4] = level.makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.VIBRANIUM, BrickType.CEMENT);
+        levels[5] = level.makeSingleTypeLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.STEEL);
+        levels[6] = level.makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.VIBRANIUM, BrickType.STEEL);
+        levels[7] = level.makeSingleTypeLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.VIBRANIUM);
 
-	public BrickController[][] makeLevels(Rectangle drawArea, int brickCount, int lineCount,
-			double brickDimensionRatio) {
-		BrickController[][] tmp = new BrickController[LEVELS_COUNT][];
-		tmp[0] = level.makeSingleTypeLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.CLAY);
-		tmp[1] = level.makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.CLAY,
-				BrickType.CEMENT);
-		tmp[2] = level.makeSingleTypeLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.CEMENT);
-		tmp[3] = level.makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.CLAY,
-				BrickType.STEEL);
-		tmp[4] = level.makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.VIBRANIUM,
-				BrickType.CEMENT);
-		tmp[5] = level.makeSingleTypeLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.STEEL);
-		tmp[6] = level.makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.VIBRANIUM,
-				BrickType.STEEL);
-		tmp[7] = level.makeSingleTypeLevel(drawArea, brickCount, lineCount, brickDimensionRatio, BrickType.VIBRANIUM);
-		return tmp;
-	}
+        return levels;
+    }
 }
+
