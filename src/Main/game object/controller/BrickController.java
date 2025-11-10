@@ -1,10 +1,6 @@
 package main.java.gameObjects.controller;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Shape;
+import java.awt.*;
 import java.awt.geom.Point2D;
 
 import main.java.gameObjects.model.brick.BrickModel;
@@ -13,194 +9,152 @@ import main.java.gameObjects.model.crack.CrackDirection;
 import main.java.gameObjects.view.BrickView;
 
 /**
- * This abstract BrickController class allows other class to inherit
+ * Abstract class that provides base behavior and common data for bricks.
+ * Subclasses must implement shape creation and specific brick drawing.
  * 
  * @author Emily
- *
  */
-
 public abstract class BrickController {
 
-	public static final int MIN_CRACK = 1;
-	public static final int DEF_CRACK_DEPTH = 1;
-	public static final int DEF_STEPS = 35;
+    public static final int MIN_CRACK = 1;
+    public static final int DEF_CRACK_DEPTH = 1;
+    public static final int DEF_STEPS = 35;
 
-	private Shape brickFace;
+    private final BrickModel brickModel;
+    private final BrickView brickView;
+    private Shape brickFace;
 
-	private BrickModel brickModel;
-	private BrickView brickView;
-	
-	/**
-	 * Constructor to create the brick controller
-	 * 
-	 * @param name     name of brick
-	 * @param pos      position of brick
-	 * @param size     size of brick
-	 * @param border   border color of the brick
-	 * @param inner    inner color of the brick
-	 * @param strength the strength of the brick
-	 */
+    /**
+     * Constructs a BrickController with specified parameters.
+     * 
+     * @param name     Brick name
+     * @param pos      Position of the brick (top-left corner)
+     * @param size     Size of the brick
+     * @param border   Border color
+     * @param inner    Inner color
+     * @param strength Strength of the brick (hit points)
+     */
+    public BrickController(String name, Point pos, Dimension size, Color border, Color inner, int strength) {
+        this.brickModel = new BrickModel(name, strength, border, inner);
+        this.brickFace = makeBrickFace(pos, size);
+        this.brickView = new BrickView();
+    }
 
-	public BrickController(String name, Point pos, Dimension size, Color border, Color inner, int strength) {
+    /**
+     * Creates a shape representing the brick.
+     * 
+     * @param pos  Position of the brick
+     * @param size Dimension of the brick
+     * @return The shape of the brick
+     */
+    protected abstract Shape makeBrickFace(Point pos, Dimension size);
 
-		brickModel = new BrickModel(name, strength, border, inner);
-		setBrickFace(makeBrickFace(pos, size));
-		brickView = new BrickView();
-		
-	}
+    /**
+     * Returns the shape of the brick for collision and rendering.
+     * Must be implemented by subclasses to define brick geometry.
+     * 
+     * @return Shape of the brick
+     */
+    public abstract Shape getBrick();
 
-	/**
-	 * Abstract method to create the shape of the brick object
-	 * 
-	 * @param pos  Position of the brick object
-	 * @param size Size of the brick object
-	 * @return The shape of the brick object
-	 */
+    /**
+     * Registers impact on the brick at specified point and crack direction.
+     * Default behavior reduces strength and may break the brick.
+     * 
+     * @param point Impact point coordinate
+     * @param dir   Direction of crack
+     * @return true if the brick is broken after impact, false otherwise
+     */
+    public boolean setImpact(Point2D point, CrackDirection dir) {
+        if (isBroken()) {
+            return false;
+        }
+        impact();
+        return isBroken();
+    }
 
-	protected abstract Shape makeBrickFace(Point pos, Dimension size);
+    /**
+     * Detects the impact side relative to the ball controller.
+     * 
+     * @param ballController The ball instance colliding with brick
+     * @return ImpactDirection indicating side of impact or NO_IMPACT if none
+     */
+    public final ImpactDirection findImpact(BallController ballController) {
+        if (isBroken()) {
+            return ImpactDirection.NO_IMPACT;
+        }
+        if (getBrickFace().contains(ballController.getRight())) {
+            return ImpactDirection.LEFT_IMPACT;
+        } else if (getBrickFace().contains(ballController.getLeft())) {
+            return ImpactDirection.RIGHT_IMPACT;
+        } else if (getBrickFace().contains(ballController.getUp())) {
+            return ImpactDirection.DOWN_IMPACT;
+        } else if (getBrickFace().contains(ballController.getDown())) {
+            return ImpactDirection.UP_IMPACT;
+        }
+        return ImpactDirection.NO_IMPACT;
+    }
 
-	/**
-	 * Getter for the shape of the brick object
-	 * 
-	 * @return The shape of the brick object
-	 */
+    /**
+     * Returns whether the brick is considered broken.
+     * 
+     * @return true if strength is zero or less
+     */
+    public final boolean isBroken() {
+        return brickModel.isBroken();
+    }
 
-	public abstract Shape getBrick();
+    /**
+     * Repairs the brick by resetting strength to full and marking as unbroken.
+     */
+    public void repair() {
+        brickModel.setBroken(false);
+        brickModel.setStrength(brickModel.getFullStrength());
+    }
 
-	/**
-	 * Method to determine whether the brick is broken or not
-	 * 
-	 * @param point The coordinates of the point of the ball
-	 * @param dir   The direction of the impact
-	 * @return True if brick is not broken, False if the brick is broken
-	 */
+    /**
+     * Reduces the brick strength by one unit and marks broken if strength is zero.
+     */
+    public void impact() {
+        int newStrength = brickModel.getStrength() - 1;
+        brickModel.setStrength(newStrength);
+        brickModel.setBroken(newStrength <= 0);
+    }
 
-	public boolean setImpact(Point2D point, CrackDirection dir) {
-		if (isBroken())
-			return false;
-		impact();
-		return isBroken();
-	}
+    /**
+     * Updates the graphical representation of the brick.
+     * 
+     * @param brick The brick instance
+     * @param g2d   Graphics context for drawing
+     */
+    public void updateView(BrickController brick, Graphics2D g2d) {
+        brickView.drawBrick(brick, g2d);
+    }
 
-	/**
-	 * Method to find the impact point between the ball object and the brick object
-	 * 
-	 * @param ballController The ball object
-	 * @return The speed and direction of the ball after impact
-	 */
+    // Accessors for color, shape, and name
 
-	public final ImpactDirection findImpact(BallController ballController) {
-		if (isBroken())
-			return ImpactDirection.NO_IMPACT;
-		ImpactDirection out = ImpactDirection.NO_IMPACT;
-		if (getBrickFace().contains(ballController.getRight()))
-			out = ImpactDirection.LEFT_IMPACT;
-		else if (getBrickFace().contains(ballController.getLeft()))
-			out = ImpactDirection.RIGHT_IMPACT;
-		else if (getBrickFace().contains(ballController.getUp()))
-			out = ImpactDirection.DOWN_IMPACT;
-		else if (getBrickFace().contains(ballController.getDown()))
-			out = ImpactDirection.UP_IMPACT;
-		return out;
-	}
+    public Color getBorder() {
+        return brickModel.getBorderColor();
+    }
 
-	/**
-	 * Method to determine whether the brick object is broken
-	 * 
-	 * @return True if the brick object is broken, False if the brick object is not
-	 *         broken
-	 */
+    public Color getInner() {
+        return brickModel.getInnerColor();
+    }
 
-	public final boolean isBroken() {
-		return brickModel.isBroken();
-	}
+    public Shape getBrickFace() {
+        return brickFace;
+    }
 
-	/**
-	 * Method to reset the strength of the brick object to full strength
-	 */
+    public void setBrickFace(Shape brickFace) {
+        this.brickFace = brickFace;
+    }
 
-	public void repair() {
-		brickModel.setBroken(false);
-		brickModel.setStrength(brickModel.getFullStrength());
-	}
+    public String getName() {
+        return brickModel.getName();
+    }
 
-	/**
-	 * Method to decrease the strength of the brick object
-	 */
-
-	public void impact() {
-		brickModel.setStrength(brickModel.getStrength() - 1);
-		brickModel.setBroken((brickModel.getStrength() == 0));
-	}
-	
-	/**
-	 * Method to update the view of the bricks
-	 * 
-	 * @param brick Brick object
-	 * @param g2d   Graphics
-	 */
-	
-	public void updateView(BrickController brick, Graphics2D g2d) {
-		brickView.drawBrick(brick, g2d);
-	}
-
-	/**
-	 * Getter to get the Border colour
-	 * 
-	 * @return Border colour
-	 */
-
-	public Color getBorder() {
-		return brickModel.getBorderColor();
-	}
-
-	/**
-	 * Getter to get the Inner colour
-	 * 
-	 * @return Inner colour
-	 */
-
-	public Color getInner() {
-		return brickModel.getInnerColor();
-	}
-
-	/**
-	 * Method to get the brick face
-	 * 
-	 * @return brick face
-	 */
-	public Shape getBrickFace() {
-		return brickFace;
-	}
-
-	/**
-	 * Method to set the brick Face
-	 * 
-	 * @param brickFace
-	 */
-
-	public void setBrickFace(Shape brickFace) {
-		this.brickFace = brickFace;
-	}
-
-	/**
-	 * Getter to get the brick's name
-	 * 
-	 * @return String brick name
-	 */
-
-	public String getName() {
-		return brickModel.getName();
-	}
-
-	/**
-	 * Setter to set the name of the brick
-	 * 
-	 * @param name String name of the brick
-	 */
-
-	public void setName(String name) {
-		brickModel.setName(name);
-	}
-
+    public void setName(String name) {
+        brickModel.setName(name);
+    }
 }
+
