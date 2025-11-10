@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Enhanced Javadoc Help Page -->
   <meta charset="UTF-8">
   <meta name="description" content="Javadoc Help Page">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Help - Javadoc</title>
 
-  <link rel="stylesheet" href="stylesheet.css">
+  <!-- Styles -->
+  <link rel="stylesheet" href="stylesheet.css" title="Style">
   <link rel="stylesheet" href="script-dir/jquery-ui.css">
 
+  <!-- Scripts -->
   <script src="script-dir/jquery-3.4.1.js" defer></script>
   <script src="script-dir/jquery-ui.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 
 <body class="help-page">
-  <header class="flexHeader">
-    <nav>
+  <!-- ===== HEADER ===== -->
+  <header class="flexHeader" role="banner">
+    <nav role="navigation" aria-label="Main Navigation">
       <ul class="navList">
         <li><a href="main/java/gameWindow/package-summary.html">Package</a></li>
         <li>Class</li>
@@ -24,17 +28,20 @@
         <li><a href="overview-tree.html">Tree</a></li>
         <li><a href="deprecated-list.html">Deprecated</a></li>
         <li><a href="index-files/index-1.html">Index</a></li>
-        <li class="navBarCell1Rev">Help</li>
+        <li class="active"><a href="#">Help</a></li>
       </ul>
     </nav>
   </header>
 
-  <main class="flexContent">
-    <h1>Javadoc Help Guide</h1>
-    <p class="intro">
-      This help file explains how to navigate and interpret the Javadoc API documentation. 
-      Each section below describes a page type or feature of the documentation.
-    </p>
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="flexContent" role="main">
+    <section class="header">
+      <h1>Javadoc Help Guide</h1>
+      <p class="intro">
+        This help page explains how to navigate and interpret the Javadoc API documentation. 
+        Each section below describes a page type or feature of the documentation.
+      </p>
+    </section>
 
     <section class="helpSection">
       <h2>Annotation Type</h2>
@@ -62,15 +69,15 @@
     <section class="helpSection">
       <h2>Use</h2>
       <p>
-        Each package, class, or interface has its own "Use" page, showing where and how it's used.
-        It lists subclasses, fields, methods, and constructors involving the given class or package.
+        Each package, class, or interface has its own "Use" page, showing where and how it’s used.
+        It lists subclasses, fields, methods, and constructors that reference the given class or package.
       </p>
     </section>
 
     <section class="helpSection">
       <h2>Tree (Class Hierarchy)</h2>
       <p>
-        The <a href="overview-tree.html">Class Hierarchy</a> page shows class inheritance and interface hierarchies.
+        The <a href="overview-tree.html">Class Hierarchy</a> page displays inheritance and interface hierarchies.
       </p>
       <ul>
         <li>At the overview level, it shows hierarchies for all packages.</li>
@@ -82,22 +89,22 @@
       <h2>Deprecated API</h2>
       <p>
         The <a href="deprecated-list.html">Deprecated API</a> page lists APIs that are no longer recommended.
-        These may have improved replacements and can be removed in future versions.
+        These may have newer alternatives and can be removed in future releases.
       </p>
     </section>
 
     <section class="helpSection">
       <h2>Index</h2>
       <p>
-        The <a href="index-files/index-1.html">Index</a> provides an alphabetic listing of all classes, methods, fields, packages, and interfaces.
+        The <a href="index-files/index-1.html">Index</a> provides an alphabetical listing of all classes, methods, fields, packages, and interfaces.
       </p>
     </section>
 
     <section class="helpSection">
       <h2>Serialized Form</h2>
       <p>
-        Serializable or externalizable classes include details of serialization fields and methods.
-        Access this information via the "Serialized Form" link in a class’s “See Also” section.
+        Serializable or externalizable classes include details of their serialization fields and methods.
+        This information can be accessed via the "Serialized Form" link in the “See Also” section of class documentation.
       </p>
     </section>
 
@@ -111,8 +118,8 @@
     <section class="helpSection">
       <h2>Search</h2>
       <p>
-        You can search for modules, packages, classes, methods, fields, and system properties by name,
-        using full or partial (camel-case) terms. Examples:
+        You can search for modules, packages, classes, methods, fields, and system properties using full or partial names.
+        Supports camel-case shortcuts, for example:
       </p>
       <ul>
         <li><code>j.l.obj</code> → <code>java.lang.Object</code></li>
@@ -120,19 +127,22 @@
         <li><code>HM.cK</code> → <code>java.util.HashMap.containsKey(Object)</code></li>
       </ul>
       <p>
-        See the full <a href="https://docs.oracle.com/en/java/javase/14/docs/specs/javadoc/javadoc-search-spec.html" target="_blank">
-        Javadoc Search Specification</a> for more details.
+        See the full 
+        <a href="https://docs.oracle.com/en/java/javase/14/docs/specs/javadoc/javadoc-search-spec.html" target="_blank" rel="noopener">
+        Javadoc Search Specification</a> for details.
       </p>
     </section>
 
     <hr>
+
     <p class="note">
       <em>This help file applies to API documentation generated by the standard Javadoc doclet.</em>
     </p>
   </main>
 
-  <footer>
-    <nav>
+  <!-- ===== FOOTER ===== -->
+  <footer role="contentinfo">
+    <nav aria-label="Footer Navigation">
       <ul class="navList">
         <li><a href="main/java/gameWindow/package-summary.html">Package</a></li>
         <li>Class</li>
@@ -140,7 +150,7 @@
         <li><a href="overview-tree.html">Tree</a></li>
         <li><a href="deprecated-list.html">Deprecated</a></li>
         <li><a href="index-files/index-1.html">Index</a></li>
-        <li class="navBarCell1Rev">Help</li>
+        <li class="active"><a href="#">Help</a></li>
       </ul>
     </nav>
   </footer>
