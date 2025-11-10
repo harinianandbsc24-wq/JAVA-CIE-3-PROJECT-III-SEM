@@ -27,11 +27,10 @@
 
   <header role="banner">
     <nav role="navigation" class="topNav">
-      <!-- ======= TOP NAVBAR ======= -->
-      <ul class="navList" title="Navigation">
+      <ul class="navList" title="Top Navigation">
         <li><a href="main/java/gameWindow/package-summary.html">Package</a></li>
-        <li>Class</li>
-        <li>Use</li>
+        <li><span>Class</span></li>
+        <li><span>Use</span></li>
         <li><a href="overview-tree.html">Tree</a></li>
         <li><a href="deprecated-list.html">Deprecated</a></li>
         <li><a href="index-files/index-1.html">Index</a></li>
@@ -42,21 +41,21 @@
         <div class="navListSearch">
           <label for="search">Search:</label>
           <input type="text" id="search" placeholder="Search" disabled>
-          <input type="reset" id="reset" value="Reset" disabled>
+          <button type="reset" id="reset" disabled>Reset</button>
         </div>
       </div>
     </nav>
   </header>
 
   <main role="main">
-    <div class="header">
+    <header class="page-header">
       <h1 class="title">System Properties</h1>
-    </div>
+    </header>
 
     <section class="systemPropertiesContainer">
       <div class="systemPropertiesSummary">
-        <table>
-          <caption><span>System Properties Summary</span></caption>
+        <table aria-label="System Properties Summary">
+          <caption>System Properties Summary</caption>
           <thead>
             <tr>
               <th scope="col" class="colFirst">Property</th>
@@ -64,14 +63,13 @@
             </tr>
           </thead>
           <tbody>
-            <!-- Example rows — add yours dynamically if needed -->
             <tr>
-              <td>java.version</td>
-              <td>Used in GameFrame initialization</td>
+              <td><code>java.version</code></td>
+              <td>Used in <em>GameFrame</em> initialization</td>
             </tr>
             <tr>
-              <td>os.name</td>
-              <td>Referenced in Environment Setup</td>
+              <td><code>os.name</code></td>
+              <td>Referenced in <em>Environment Setup</em></td>
             </tr>
           </tbody>
         </table>
@@ -81,11 +79,10 @@
 
   <footer role="contentinfo">
     <nav role="navigation" class="bottomNav">
-      <!-- ======= BOTTOM NAVBAR ======= -->
-      <ul class="navList" title="Navigation">
+      <ul class="navList" title="Bottom Navigation">
         <li><a href="main/java/gameWindow/package-summary.html">Package</a></li>
-        <li>Class</li>
-        <li>Use</li>
+        <li><span>Class</span></li>
+        <li><span>Use</span></li>
         <li><a href="overview-tree.html">Tree</a></li>
         <li><a href="deprecated-list.html">Deprecated</a></li>
         <li><a href="index-files/index-1.html">Index</a></li>
