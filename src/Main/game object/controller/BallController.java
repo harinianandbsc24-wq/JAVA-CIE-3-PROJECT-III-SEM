@@ -8,256 +8,146 @@ import main.java.gameObjects.model.ball.BallModel;
 import main.java.gameObjects.view.BallView;
 
 /**
- * This abstract class Ball Controller allows other class to inherit
+ * Abstract base class for ball controllers.
+ * Handles common position, speed, and rendering logic.
+ * Subclasses must implement makeBall() to specify shape.
  * 
  * @author Emily
- *
  */
+public abstract class BallController {
 
-abstract public class BallController {
+    private final BallModel ballModel;
+    private final BallView ballView;
+    private Shape ballFace;
 
-	private Shape ballFace;
+    public BallController(Point2D center, int radius, Color inner, Color border) {
+        this.ballModel = new BallModel(center, radius, inner, border);
+        this.ballFace = makeBall(center, radius);
+        this.ballView = new BallView();
+    }
 
-	private BallModel ballModel;
-	private BallView ballView;
+    /**
+     * Creates the shape of the ball. Must be implemented by subclasses.
+     */
+    public abstract Shape makeBall(Point2D center, int radius);
 
-	/**
-	 * Constructor of Ball class
-	 * 
-	 * @param center The coordinates of the center of the ball
-	 * @param radius The radius of the ball
-	 * @param inner  The color code for the inner color of the ball object
-	 * @param border The color code for the border color of the ball object
-	 */
+    /**
+     * Moves the ball according to its current speed and updates shape.
+     */
+    public void move() {
+        RectangularShape rect = (RectangularShape) ballFace;
+        Point2D position = getPosition();
+        position.setLocation(position.getX() + getSpeedX(), position.getY() + getSpeedY());
+        double width = rect.getWidth();
+        double height = rect.getHeight();
+        rect.setFrame(position.getX() - width / 2, position.getY() - height / 2, width, height);
+        setPoints(width, height);
+        ballFace = rect;
+    }
 
-	public BallController(Point2D center, int radius, Color inner, Color border) {
+    /**
+     * Updates the view of the ball on the graphics context.
+     */
+    public void updateView(BallController ball, Graphics2D g2d) {
+        ballView.drawBall(ball, g2d);
+    }
 
-		ballModel = new BallModel(center, radius, inner, border);
-		ballFace = makeBall(center, radius);
-		ballView = new BallView();
+    /**
+     * Sets the ball's speed.
+     */
+    public void setSpeed(int x, int y) {
+        ballModel.setXSpeed(x);
+        ballModel.setYSpeed(y);
+    }
 
-	}
+    public void setXSpeed(int s) {
+        ballModel.setXSpeed(s);
+    }
 
-	/**
-	 * Abstract method to create the shape of the ball object
-	 * 
-	 * @param center The coordinates of the center of the ball
-	 * @param radius The radius of the ball
-	 * @return The shape of the ball object
-	 */
+    public void setYSpeed(int s) {
+        ballModel.setYSpeed(s);
+    }
 
-	public abstract Shape makeBall(Point2D center, int radius);
+    /**
+     * Reverse horizontal speed.
+     */
+    public void reverseX() {
+        ballModel.setXSpeed(-getSpeedX());
+    }
 
-	/**
-	 * Method to move the ball object
-	 */
+    /**
+     * Reverse vertical speed.
+     */
+    public void reverseY() {
+        ballModel.setYSpeed(-getSpeedY());
+    }
 
-	public void move() {
-		RectangularShape tmp = (RectangularShape) ballFace;
-		getPosition().setLocation((getPosition().getX() + getSpeedX()), (getPosition().getY() + getSpeedY()));
-		double w = tmp.getWidth();
-		double h = tmp.getHeight();
+    public Color getBorderColor() {
+        return ballModel.getBorderColor();
+    }
 
-		tmp.setFrame((getPosition().getX() - (w / 2)), (getPosition().getY() - (h / 2)), w, h);
-		setPoints(w, h);
+    public Color getInnerColor() {
+        return ballModel.getInnerColor();
+    }
 
-		ballFace = tmp;
-	}
-	
-	/**
-	 * Method to update the view of the ball
-	 * 
-	 * @param ball Ball object
-	 * @param g2d  Graphics
-	 */
-	
-	public void updateView(BallController ball, Graphics2D g2d) {
-		ballView.drawBall(ball, g2d);
-	}
+    /**
+     * Gets the position of the ball.
+     */
+    public Point2D getPosition() {
+        // Optional: return a defensive copy if external mutation is a concern
+        return ballModel.getPosition();
+    }
 
-	/**
-	 * Setter to set the speed of the ball
-	 * 
-	 * @param x The horizontal speed of the ball
-	 * @param y The vertical speed of the ball
-	 */
+    /**
+     * Gets the shape representation of the ball.
+     */
+    public Shape getBallFace() {
+        return ballFace;
+    }
 
-	public void setSpeed(int x, int y) {
-		ballModel.setXSpeed(x);
-		ballModel.setYSpeed(y);
-	}
+    /**
+     * Moves the ball to a specific point and updates shape accordingly.
+     */
+    public void moveTo(Point p) {
+        getPosition().setLocation(p);
+        RectangularShape rect = (RectangularShape) ballFace;
+        double width = rect.getWidth();
+        double height = rect.getHeight();
+        rect.setFrame(p.getX() - width / 2, p.getY() - height / 2, width, height);
+        ballFace = rect;
+    }
 
+    /**
+     * Updates the directional edge points of the ball shape.
+     */
+    private void setPoints(double width, double height) {
+        ballModel.getUp().setLocation(getPosition().getX(), getPosition().getY() - height / 2);
+        ballModel.getDown().setLocation(getPosition().getX(), getPosition().getY() + height / 2);
+        ballModel.getLeft().setLocation(getPosition().getX() - width / 2, getPosition().getY());
+        ballModel.getRight().setLocation(getPosition().getX() + width / 2, getPosition().getY());
+    }
 
-	/**
-	 * Setter to set horizontal speed of the ball
-	 * 
-	 * @param s The horizontal speed of the ball
-	 */
+    public int getSpeedX() {
+        return ballModel.getSpeedX();
+    }
 
-	public void setXSpeed(int s) {
-		ballModel.setXSpeed(s);
-	}
+    public int getSpeedY() {
+        return ballModel.getSpeedY();
+    }
 
-	/**
-	 * Setter to set the vertical speed of the ball
-	 * 
-	 * @param s The vertical speed of the ball
-	 */
+    public Point2D getUp() {
+        return ballModel.getUp();
+    }
 
-	public void setYSpeed(int s) {
-		ballModel.setYSpeed(s);
-	}
+    public Point2D getDown() {
+        return ballModel.getDown();
+    }
 
-	/**
-	 * Method to reverse the horizontal speed of the ball (Move the ball in opposite
-	 * direction horizontally)
-	 */
+    public Point2D getLeft() {
+        return ballModel.getLeft();
+    }
 
-	public void reverseX() {
-		int xSpeed = getSpeedX() * -1;
-		ballModel.setXSpeed(xSpeed);
-	}
-
-	/**
-	 * Method to reverse the vertical speed of the ball (Move the ball in opposite
-	 * direction vertically)
-	 */
-
-	public void reverseY() {
-		int ySpeed = getSpeedY() * -1;
-		ballModel.setYSpeed(ySpeed);
-	}
-
-	/**
-	 * Getter for the border color of the ball object
-	 * 
-	 * @return Color code of the border color of the ball object
-	 */
-
-	public Color getBorderColor() {
-		return ballModel.getBorderColor();
-	}
-
-	/**
-	 * Getter for the inner Color of the ball object
-	 * 
-	 * @return Color code of the inner color of the ball object
-	 */
-
-	public Color getInnerColor() {
-		return ballModel.getInnerColor();
-	}
-
-	/**
-	 * Getter for the position of the ball object
-	 * 
-	 * @return the coordinates of the ball's position
-	 */
-
-	public Point2D getPosition() {
-		return ballModel.getPosition();
-	}
-
-	/**
-	 * Getter for the shape of the ball object
-	 * 
-	 * @return the shape of the ball
-	 */
-
-	public Shape getBallFace() {
-		return ballFace;
-	}
-
-	/**
-	 * Method to move the ball to point p
-	 * 
-	 * @param p coordinates of the point for the ball to move to
-	 */
-
-	public void moveTo(Point p) {
-		getPosition().setLocation(p);
-
-		RectangularShape tmp = (RectangularShape) ballFace;
-		double w = tmp.getWidth();
-		double h = tmp.getHeight();
-
-		tmp.setFrame((getPosition().getX() - (w / 2)), (getPosition().getY() - (h / 2)), w, h);
-		ballFace = tmp;
-	}
-
-	/**
-	 * Setter to set set the points of the ball
-	 * 
-	 * @param width  The width of the ball
-	 * @param height The height of the ball
-	 */
-
-	private void setPoints(double width, double height) {
-		getUp().setLocation(getPosition().getX(), getPosition().getY() - (height / 2));
-		getDown().setLocation(getPosition().getX(), getPosition().getY() + (height / 2));
-
-		getLeft().setLocation(getPosition().getX() - (width / 2), getPosition().getY());
-		getRight().setLocation(getPosition().getX() + (width / 2), getPosition().getY());
-	}
-
-	/**
-	 * Getter for the horizontal speed of the ball
-	 * 
-	 * @return the horizontal speed of the ball
-	 */
-
-	public int getSpeedX() {
-		return ballModel.getSpeedX();
-	}
-
-	/**
-	 * Getter for the vertical speed of the ball
-	 * 
-	 * @return the vertical speed of the ball
-	 */
-
-	public int getSpeedY() {
-		return ballModel.getSpeedY();
-	}
-
-	/**
-	 * Getter to get the up point
-	 * 
-	 * @return up point
-	 */
-
-	public Point2D getUp() {
-		return ballModel.getUp();
-	}
-
-	/**
-	 * Getter to get the down point
-	 * 
-	 * @return down point
-	 */
-
-	public Point2D getDown() {
-		return ballModel.getDown();
-	}
-
-	/**
-	 * Getter to get the left point
-	 * 
-	 * @return left point
-	 */
-
-	public Point2D getLeft() {
-		return ballModel.getLeft();
-	}
-
-	/**
-	 * Getter to get the right point
-	 * 
-	 * @return right point
-	 */
-
-	public Point2D getRight() {
-		return ballModel.getRight();
-	}
-
+    public Point2D getRight() {
+        return ballModel.getRight();
+    }
 }
