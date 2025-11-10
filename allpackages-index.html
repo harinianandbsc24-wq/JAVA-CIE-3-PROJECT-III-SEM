@@ -22,8 +22,8 @@
 
 <body class="all-packages-index">
   <noscript>
-    <div class="no-js-warning">
-       JavaScript is disabled. Please enable it for full functionality.
+    <div class="no-js-warning" role="alert">
+      JavaScript is disabled. Please enable it for full functionality.
     </div>
   </noscript>
 
@@ -32,18 +32,19 @@
     <nav class="topNav" role="navigation" aria-label="Main navigation">
       <ul class="navList">
         <li><a href="main/java/gameWindow/package-summary.html">Package</a></li>
-        <li>Class</li>
-        <li>Use</li>
+        <li><span>Class</span></li>
+        <li><span>Use</span></li>
         <li><a href="overview-tree.html">Tree</a></li>
         <li><a href="deprecated-list.html">Deprecated</a></li>
         <li><a href="index-files/index-1.html">Index</a></li>
         <li><a href="help-doc.html">Help</a></li>
       </ul>
-      <div class="navSearch">
+
+      <form class="navSearch" role="search" aria-label="Search documentation">
         <label for="search">Search:</label>
-        <input type="text" id="search" placeholder="Search (disabled)" disabled>
-        <button id="reset" disabled>Reset</button>
-      </div>
+        <input type="search" id="search" placeholder="Search (disabled)" disabled aria-disabled="true">
+        <button type="reset" id="reset" disabled aria-disabled="true">Reset</button>
+      </form>
     </nav>
   </header>
 
@@ -78,15 +79,17 @@
     <nav class="bottomNav" aria-label="Footer navigation">
       <ul class="navList">
         <li><a href="main/java/gameWindow/package-summary.html">Package</a></li>
-        <li>Class</li>
-        <li>Use</li>
+        <li><span>Class</span></li>
+        <li><span>Use</span></li>
         <li><a href="overview-tree.html">Tree</a></li>
         <li><a href="deprecated-list.html">Deprecated</a></li>
         <li><a href="index-files/index-1.html">Index</a></li>
         <li><a href="help-doc.html">Help</a></li>
       </ul>
     </nav>
-    <p class="footerNote">Generated using Enhanced Javadoc Template — Clean & Modern Design</p>
+    <p class="footerNote">
+      Generated using <strong>Enhanced Javadoc Template</strong> — Clean &amp; Modern Design
+    </p>
   </footer>
 </body>
 </html>
