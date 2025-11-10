@@ -6,9 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Serialized Form</title>
 
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="stylesheet.css">
   <link rel="stylesheet" href="script-dir/jquery-ui.css">
 
+  <!-- Scripts -->
   <script src="script-dir/jquery-3.4.1.js" defer></script>
   <script src="script-dir/jquery-ui.js" defer></script>
   <script src="script-dir/jszip/dist/jszip.min.js" defer></script>
@@ -18,11 +20,14 @@
 
 <body class="serialized-form">
   <noscript>
-    <div class="no-js-warning">⚠ JavaScript is disabled in your browser. Some features may not work properly.</div>
+    <div class="no-js-warning">
+      ⚠ JavaScript is disabled in your browser. Some features may not function properly.
+    </div>
   </noscript>
 
+  <!-- ===== HEADER ===== -->
   <header class="flexHeader" role="banner">
-    <nav class="topNav" role="navigation">
+    <nav class="topNav" role="navigation" aria-label="Main Navigation">
       <ul class="navList">
         <li><a href="main/java/gameWindow/package-summary.html">Package</a></li>
         <li>Class</li>
@@ -35,14 +40,19 @@
     </nav>
   </header>
 
+  <!-- ===== MAIN CONTENT ===== -->
   <main role="main" class="flexContent">
-    <div class="header">
+    <header class="pageHeader">
       <h1>Serialized Form</h1>
-    </div>
+    </header>
 
+    <!-- GameFrame -->
     <section class="serializedClassDetails" id="main.java.gameWindow.GameFrame">
       <h2>Class <code>main.java.gameWindow.GameFrame</code></h2>
-      <p><strong>Extends:</strong> <code>javax.swing.JFrame</code> — <strong>Implements:</strong> <code>Serializable</code></p>
+      <p>
+        <strong>Extends:</strong> <code>javax.swing.JFrame</code> —
+        <strong>Implements:</strong> <code>Serializable</code>
+      </p>
 
       <h3>Serialized Fields</h3>
       <ul class="fieldList">
@@ -55,9 +65,13 @@
 
     <hr>
 
+    <!-- InfoPage -->
     <section class="serializedClassDetails" id="main.java.gameWindow.InfoPage">
       <h2>Class <code>main.java.gameWindow.InfoPage</code></h2>
-      <p><strong>Extends:</strong> <code>javax.swing.JComponent</code> — <strong>Implements:</strong> <code>Serializable</code></p>
+      <p>
+        <strong>Extends:</strong> <code>javax.swing.JComponent</code> —
+        <strong>Implements:</strong> <code>Serializable</code>
+      </p>
 
       <h3>Serialized Fields</h3>
       <ul class="fieldList">
@@ -75,8 +89,9 @@
     </section>
   </main>
 
+  <!-- ===== FOOTER ===== -->
   <footer role="contentinfo">
-    <nav class="bottomNav">
+    <nav class="bottomNav" role="navigation" aria-label="Footer Navigation">
       <ul class="navList">
         <li><a href="main/java/gameWindow/package-summary.html">Package</a></li>
         <li>Class</li>
