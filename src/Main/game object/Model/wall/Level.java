@@ -10,191 +10,128 @@ import main.java.gameObjects.model.brick.BrickFactory;
 import main.java.gameObjects.model.brick.BrickType;
 
 /**
- * Objects of this class creates levels for the game
+ * Creates levels for the brick break game with different layouts.
+ * Supports single type and chessboard pattern levels with some randomization.
  * 
  * @author Emily
- *
  */
 public class Level {
 
-	private BrickFactory brFactory;
+    private final BrickFactory brFactory;
 
-	/**
-	 * Default constructor to create initialise the value for field
-	 */
-	public Level() {
+    /**
+     * Default constructor initializing brick factory.
+     */
+    public Level() {
+        brFactory = new BrickFactory();
+    }
 
-		brFactory = new BrickFactory();
+    /**
+     * Creates an array of bricks of a single type, arranged in lines.
+     * May include random special or health bricks.
+     * 
+     * @param drawArea       The area for placing bricks.
+     * @param brickCnt       Total number of bricks.
+     * @param lineCnt        Number of lines.
+     * @param brickSizeRatio Width to height ratio of each brick.
+     * @param type           The BrickType for normal bricks.
+     * @return Array of BrickController objects for the level.
+     */
+    public BrickController[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, BrickType type) {
+        brickCnt -= brickCnt % lineCnt;
+        int brickOnLine = brickCnt / lineCnt;
+        double brickLen = drawArea.getWidth() / brickOnLine;
+        double brickHgt = brickLen / brickSizeRatio;
 
-	}
+        brickCnt += lineCnt / 2;  // Allocate for staggered rows
+        BrickController[] bricks = new BrickController[brickCnt];
 
-	/**
-	 * Method to create an array of a single type of bricks
-	 * 
-	 * @param drawArea       The area of the wall
-	 * @param brickCnt       The amount of bricks
-	 * @param lineCnt        The amount of line
-	 * @param brickSizeRatio The ratio of the brick size
-	 * @param type           The type of the brick
-	 * @return An array of brick objects
-	 */
+        Dimension brickSize = new Dimension((int) brickLen, (int) brickHgt);
+        Point p = new Point();
+        Random rand = new Random();
 
-	public BrickController[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio,
-			BrickType type) {
-		/*
-		 * if brickCount is not divisible by line count,brickCount is adjusted to the
-		 * biggest multiple of lineCount smaller then brickCount
-		 */
-		brickCnt -= brickCnt % lineCnt;
+        int i;
+        for (i = 0; i < bricks.length; i++) {
+            int line = i / brickOnLine;
+            if (line == lineCnt) break;
 
-		int brickOnLine = brickCnt / lineCnt;
+            double x = (i % brickOnLine) * brickLen;
+            x = (line % 2 == 0) ? x : (x - (brickLen / 2));  // Staggered on odd lines
+            double y = line * brickHgt;
+            p.setLocation(x, y);
 
-		double brickLen = drawArea.getWidth() / brickOnLine;
-		double brickHgt = brickLen / brickSizeRatio;
+            double r = rand.nextDouble();
+            double r2 = rand.nextDouble();
 
-		brickCnt += lineCnt / 2;
+            if (r < 0.3) {
+                bricks[i] = (r2 < 0.3) ? brFactory.makeBrick(p, brickSize, BrickType.HEALTH) : brFactory.makeBrick(p, brickSize, BrickType.SPECIAL);
+            } else {
+                bricks[i] = brFactory.makeBrick(p, brickSize, type);
+            }
+        }
 
-		BrickController[] tmp = new BrickController[brickCnt];
+        for (double y = brickHgt; i < bricks.length; i++, y += 2 * brickHgt) {
+            double x = (brickOnLine * brickLen) - (brickLen / 2);
+            p.setLocation(x, y);
+            bricks[i] = (rand.nextDouble() < 0.3) ? brFactory.makeBrick(p, brickSize, BrickType.SPECIAL) : brFactory.makeBrick(p, brickSize, type);
+        }
+        return bricks;
+    }
 
-		Dimension brickSize = new Dimension((int) brickLen, (int) brickHgt);
-		Point p = new Point();
+    /**
+     * Creates an array of bricks of two types in a chessboard pattern,
+     * with random chance of health bricks.
+     * 
+     * @param drawArea       The area for bricks.
+     * @param brickCnt       Total bricks count.
+     * @param lineCnt        Number of lines.
+     * @param brickSizeRatio Brick width to height ratio.
+     * @param typeA          First brick type.
+     * @param typeB          Second brick type.
+     * @return Array of BrickController instances.
+     */
+    public BrickController[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, BrickType typeA, BrickType typeB) {
+        brickCnt -= brickCnt % lineCnt;
+        int brickOnLine = brickCnt / lineCnt;
 
-		Random rand = new Random();
+        int centerLeft = brickOnLine / 2 - 1;
+        int centerRight = brickOnLine / 2 + 1;
 
-		int i;
-		for (i = 0; i < tmp.length; i++) {
-			int line = i / brickOnLine;
-			if (line == lineCnt)
-				break;
-			double x = (i % brickOnLine) * brickLen;
-			x = (line % 2 == 0) ? x : (x - (brickLen / 2));
-			double y = (line) * brickHgt;
-			p.setLocation(x, y);
+        double brickLen = drawArea.getWidth() / brickOnLine;
+        double brickHgt = brickLen / brickSizeRatio;
 
-			double r = rand.nextDouble();
-			double r2 = rand.nextDouble();
+        brickCnt += lineCnt / 2;
+        BrickController[] bricks = new BrickController[brickCnt];
+        Dimension brickSize = new Dimension((int) brickLen, (int) brickHgt);
+        Point p = new Point();
+        Random rand = new Random();
 
-			// 30% chance to create Special Brick
-			if (r < 0.3) {
-				
-				if (r2 < 0.3) {
-					tmp[i] = brFactory.makeBrick(p, brickSize, BrickType.HEALTH);
-				}
-				
-				else {
-					tmp[i] = brFactory.makeBrick(p, brickSize, BrickType.SPECIAL);
-				}
-				
-			}
+        int i;
+        for (i = 0; i < bricks.length; i++) {
+            int line = i / brickOnLine;
+            if (line == lineCnt) break;
 
-			else {
-				tmp[i] = brFactory.makeBrick(p, brickSize, type);
-			}
+            int posX = i % brickOnLine;
+            double x = posX * brickLen;
+            x = (line % 2 == 0) ? x : (x - (brickLen / 2));
+            double y = line * brickHgt;
+            p.setLocation(x, y);
 
-		}
+            boolean b = (line % 2 == 0 && i % 2 == 0) || (line % 2 != 0 && posX > centerLeft && posX <= centerRight);
 
-		for (double y = brickHgt; i < tmp.length; i++, y += 2 * brickHgt) {
-			double x = (brickOnLine * brickLen) - (brickLen / 2);
-			p.setLocation(x, y);
+            if (rand.nextDouble() < 0.1) {
+                bricks[i] = brFactory.makeBrick(p, brickSize, BrickType.HEALTH);
+            } else {
+                bricks[i] = b ? brFactory.makeBrick(p, brickSize, typeA) : brFactory.makeBrick(p, brickSize, typeB);
+            }
+        }
 
-			double r = rand.nextDouble();
-
-			if (r < 0.3) {
-				tmp[i] = brFactory.makeBrick(p, brickSize, BrickType.SPECIAL);
-			}
-
-			else {
-				tmp[i] = brFactory.makeBrick(p, brickSize, type);
-			}
-		}
-		return tmp;
-
-	}
-
-	/**
-	 * Method to create an array of a two type of bricks in a chessboard pattern
-	 * 
-	 * @param drawArea       The area of the wall
-	 * @param brickCnt       The number of bricks
-	 * @param lineCnt        The number of line
-	 * @param brickSizeRatio The ratio of the brick
-	 * @param typeA          The type of the brick
-	 * @param typeB          The type of the brick
-	 * @return An array of brick objects
-	 */
-
-	public BrickController[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio,
-			BrickType typeA, BrickType typeB) {
-
-		/*
-		 * if brickCount is not divisible by line count,brickCount is adjusted to the
-		 * biggest multiple of lineCount smaller then brickCount
-		 */
-
-		brickCnt -= brickCnt % lineCnt;
-
-		int brickOnLine = brickCnt / lineCnt;
-
-		int centerLeft = brickOnLine / 2 - 1;
-		int centerRight = brickOnLine / 2 + 1;
-
-		double brickLen = drawArea.getWidth() / brickOnLine;
-		double brickHgt = brickLen / brickSizeRatio;
-
-		brickCnt += lineCnt / 2;
-
-		BrickController[] tmp = new BrickController[brickCnt];
-
-		Dimension brickSize = new Dimension((int) brickLen, (int) brickHgt);
-		Point p = new Point();
-		
-		Random rand = new Random();
-
-
-		int i;
-		for (i = 0; i < tmp.length; i++) {
-			int line = i / brickOnLine;
-			if (line == lineCnt)
-				break;
-			int posX = i % brickOnLine;
-			double x = posX * brickLen;
-			x = (line % 2 == 0) ? x : (x - (brickLen / 2));
-			double y = (line) * brickHgt;
-			p.setLocation(x, y);
-
-			boolean b = ((line % 2 == 0 && i % 2 == 0) || (line % 2 != 0 && posX > centerLeft && posX <= centerRight));
-//			tmp[i] = b ? brFactory.makeBrick(p, brickSize, typeA) : brFactory.makeBrick(p, brickSize, typeB);
-			
-			double r = rand.nextDouble();
-
-			// 10% chance create health brick instead
-			if (r < 0.1) {
-				tmp[i] = brFactory.makeBrick(p, brickSize, BrickType.HEALTH);
-			}
-
-			else {
-				tmp[i] = b ? brFactory.makeBrick(p, brickSize, typeA) : brFactory.makeBrick(p, brickSize, typeB);
-			}
-
-		}
-
-		for (double y = brickHgt; i < tmp.length; i++, y += 2 * brickHgt) {
-			double x = (brickOnLine * brickLen) - (brickLen / 2);
-			p.setLocation(x, y);
-//			tmp[i] = brFactory.makeBrick(p, brickSize, typeA);
-			
-			double r = rand.nextDouble();
-
-			if (r < 0.1) {
-				tmp[i] = brFactory.makeBrick(p, brickSize, BrickType.HEALTH);
-			}
-
-			else {
-				tmp[i] = brFactory.makeBrick(p, brickSize, typeA);
-			}
-
-		}
-		return tmp;
-	}
-
+        for (double y = brickHgt; i < bricks.length; i++, y += 2 * brickHgt) {
+            double x = (brickOnLine * brickLen) - (brickLen / 2);
+            p.setLocation(x, y);
+            bricks[i] = (rand.nextDouble() < 0.1) ? brFactory.makeBrick(p, brickSize, BrickType.HEALTH) : brFactory.makeBrick(p, brickSize, typeA);
+        }
+        return bricks;
+    }
 }
+
