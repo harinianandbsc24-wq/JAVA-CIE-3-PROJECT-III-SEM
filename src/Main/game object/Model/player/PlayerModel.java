@@ -1,115 +1,59 @@
-/*
- *  Brick Destroy - A simple Arcade video game
- *   Copyright (C) 2017  Filippo Ranza
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package main.java.gameObjects.model.player;
 
-import java.awt.*;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Color;
 
 /**
- * This class stores the pure application data for playerController class
+ * Stores the pure data for the player paddle controller.
+ * It includes the ball contact point on the paddle and the movement boundaries.
  * 
  * @author Emily
- *
  */
-
 public class PlayerModel {
 
-	public static final Color BORDER_COLOR = Color.GREEN.darker().darker();
-	public static final Color INNER_COLOR = Color.GREEN;
+    public static final Color BORDER_COLOR = Color.GREEN.darker().darker();
+    public static final Color INNER_COLOR = Color.GREEN;
 
-	private Point ballPoint;
-	private int min;
-	private int max;
+    private Point ballPoint;
+    private int minBoundary;
+    private int maxBoundary;
 
-	/**
-	 * Constructor to create a player class
-	 * 
-	 * @param ballPoint The coordinates of the point of the ball that touches the
-	 *                  player's paddle
-	 * @param width     The width of the player's paddle
-	 * @param container The rectangle shape of the player's paddle
-	 */
+    /**
+     * Constructs a PlayerModel instance.
+     * 
+     * @param ballPoint The point on the paddle where the ball contacts
+     * @param paddleWidth The width of the player's paddle
+     * @param container The rectangular boundary container for the paddle movement
+     */
+    public PlayerModel(Point ballPoint, int paddleWidth, Rectangle container) {
+        this.ballPoint = new Point(ballPoint); // Defensive copy to avoid external mutation
+        this.minBoundary = container.x + (paddleWidth / 2);
+        this.maxBoundary = container.x + container.width - (paddleWidth / 2);
+    }
 
-	public PlayerModel(Point ballPoint, int width, Rectangle container) {
+    public Point getBallPoint() {
+        return new Point(ballPoint); // Defensive copy for immutability
+    }
 
-		this.ballPoint = ballPoint;
+    public void setBallPoint(Point ballPoint) {
+        this.ballPoint = new Point(ballPoint); // Defensive copy
+    }
 
-		min = container.x + (width / 2);
-		max = min + container.width - width;
+    public int getMinBoundary() {
+        return minBoundary;
+    }
 
-	}
+    public void setMinBoundary(int minBoundary) {
+        this.minBoundary = minBoundary;
+    }
 
-	/**
-	 * Getter to get the point of the ball point
-	 * 
-	 * @return Point ball point
-	 */
+    public int getMaxBoundary() {
+        return maxBoundary;
+    }
 
-	public Point getBallPoint() {
-		return ballPoint;
-	}
-
-	/**
-	 * Setter to set the point of the ball point
-	 * 
-	 * @param ballPoint The point of the ball point
-	 */
-
-	public void setBallPoint(Point ballPoint) {
-		this.ballPoint = ballPoint;
-	}
-
-	/**
-	 * Getter to get the minimum
-	 * 
-	 * @return Integer minimum
-	 */
-
-	public int getMin() {
-		return min;
-	}
-
-	/**
-	 * Setter to set the minimum
-	 * 
-	 * @param min Integer minimum
-	 */
-
-	public void setMin(int min) {
-		this.min = min;
-	}
-
-	/**
-	 * Getter to get the maximum
-	 * 
-	 * @return Integer maximum
-	 */
-
-	public int getMax() {
-		return max;
-	}
-
-	/**
-	 * Setter to set the maximum
-	 * 
-	 * @param max Integer maximum
-	 */
-	public void setMax(int max) {
-		this.max = max;
-	}
-
+    public void setMaxBoundary(int maxBoundary) {
+        this.maxBoundary = maxBoundary;
+    }
 }
+
