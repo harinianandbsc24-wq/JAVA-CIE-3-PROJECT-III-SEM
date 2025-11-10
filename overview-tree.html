@@ -6,9 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Class Hierarchy</title>
 
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="stylesheet.css">
   <link rel="stylesheet" href="script-dir/jquery-ui.css">
 
+  <!-- Scripts -->
   <script src="script-dir/jquery-3.4.1.js" defer></script>
   <script src="script-dir/jquery-ui.js" defer></script>
   <script src="script-dir/jszip/dist/jszip.min.js" defer></script>
@@ -18,11 +20,14 @@
 
 <body class="tree">
   <noscript>
-    <div class="no-js-warning">⚠ JavaScript is disabled on your browser. Some features may not work properly.</div>
+    <div class="no-js-warning">
+      ⚠ JavaScript is disabled in your browser. Some interactive features may not function properly.
+    </div>
   </noscript>
 
+  <!-- ===== HEADER ===== -->
   <header class="flexHeader" role="banner">
-    <nav class="topNav" role="navigation">
+    <nav class="topNav" role="navigation" aria-label="Main Navigation">
       <ul class="navList">
         <li>Package</li>
         <li>Class</li>
@@ -40,26 +45,37 @@
     </nav>
   </header>
 
+  <!-- ===== MAIN CONTENT ===== -->
   <main class="flexContent" role="main">
     <section class="header">
-      <h1>Hierarchy For All Packages</h1>
+      <h1>Hierarchy for All Packages</h1>
       <p class="packageHierarchyLabel">Package Hierarchies:</p>
       <ul class="horizontal">
-        <li><a href="main/java/gameWindow/package-tree.html">main.java.gameWindow</a></li>
+        <li>
+          <a href="main/java/gameWindow/package-tree.html">main.java.gameWindow</a>
+        </li>
       </ul>
     </section>
 
     <section class="hierarchy">
       <h2>Class Hierarchy</h2>
       <ul class="classTree">
-        <li>java.lang.Object
+        <li>
+          java.lang.Object
           <ul>
-            <li>java.awt.Component 
-              <small>(implements java.awt.image.ImageObserver, java.awt.MenuContainer, java.io.Serializable)</small>
+            <li>
+              java.awt.Component
+              <small>
+                (implements java.awt.image.ImageObserver,
+                java.awt.MenuContainer,
+                java.io.Serializable)
+              </small>
               <ul>
-                <li>java.awt.Container
+                <li>
+                  java.awt.Container
                   <ul>
-                    <li>javax.swing.JComponent 
+                    <li>
+                      javax.swing.JComponent
                       <small>(implements java.io.Serializable)</small>
                       <ul>
                         <li>
@@ -67,7 +83,11 @@
                           <a href="main/java/gameWindow/GameBoard.html" title="class in main.java.gameWindow">
                             <span class="typeNameLink">GameBoard</span>
                           </a>
-                          <small>(implements java.awt.event.KeyListener, java.awt.event.MouseListener, java.awt.event.MouseMotionListener)</small>
+                          <small>
+                            (implements java.awt.event.KeyListener,
+                            java.awt.event.MouseListener,
+                            java.awt.event.MouseMotionListener)
+                          </small>
                         </li>
                       </ul>
                     </li>
@@ -81,8 +101,9 @@
     </section>
   </main>
 
+  <!-- ===== FOOTER ===== -->
   <footer role="contentinfo">
-    <nav class="bottomNav" role="navigation">
+    <nav class="bottomNav" role="navigation" aria-label="Footer Navigation">
       <ul class="navList">
         <li>Package</li>
         <li>Class</li>
@@ -96,4 +117,3 @@
   </footer>
 </body>
 </html>
-
