@@ -6,42 +6,45 @@ import java.awt.Shape;
 
 import main.java.gameObjects.controller.BallController;
 
-
 /**
- * This class renders the view of the ball object
+ * Responsible for rendering the ball object on screen.
+ * 
  * @author Emily
- *
  */
-
 public class BallView {
 
-	/**
-	 * Default constructor
-	 */
-	
-	public BallView() {
+    /**
+     * Default constructor.
+     */
+    public BallView() {
+    }
 
-	}
+    /**
+     * Draws the given ball using its shape and colors.
+     * 
+     * @param ball The ball controller with model and shape data, must not be null.
+     * @param g2d  The Graphics2D context to draw on, must not be null.
+     */
+    public void drawBall(BallController ball, Graphics2D g2d) {
+        if (ball == null || g2d == null) {
+            throw new IllegalArgumentException("Ball and Graphics2D must not be null.");
+        }
+        Shape ballShape = ball.getBallFace();
 
-	/**
-	 * Method to draw the ball
-	 * 
-	 * @param ball Ball object
-	 * @param g2d  Graphics
-	 */
+        if (ballShape == null) {
+            return; // Nothing to draw
+        }
 
-	public void drawBall(BallController ball, Graphics2D g2d) {
-		Color tmp = g2d.getColor();
+        Color originalColor = g2d.getColor();
+        try {
+            g2d.setColor(ball.getInnerColor());
+            g2d.fill(ballShape);
 
-		Shape s = ball.getBallFace();
-
-		g2d.setColor(ball.getInnerColor());
-		g2d.fill(s);
-
-		g2d.setColor(ball.getBorderColor());
-		g2d.draw(s);
-
-		g2d.setColor(tmp);
-	}
+            g2d.setColor(ball.getBorderColor());
+            g2d.draw(ballShape);
+        } finally {
+            g2d.setColor(originalColor);
+        }
+    }
 
 }
